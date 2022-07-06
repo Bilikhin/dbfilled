@@ -1,0 +1,2125 @@
+-- -----------------------------------------------------
+-- Table `myisamend`.`basket`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`basket` (
+ `id_basket` INT NOT NULL AUTO_INCREMENT,
+ `amount` INT NOT NULL,
+ `id_order` INT NOT NULL,
+ `id_sport_clothes` INT NOT NULL,
+ PRIMARY KEY (`id_basket`),
+ INDEX `fk_order_has_sport_clothes_sport_clothes1_idx` (`id_sport_clothes` ASC) VISIBLE,
+ INDEX `fk_order_has_sport_clothes_order1_idx` (`id_order` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`brand_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`brand_status` (
+ `id_brand_status` INT NOT NULL AUTO_INCREMENT,
+ `isactive` TINYINT(1) NOT NULL,
+ PRIMARY KEY (`id_brand_status`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`brands`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`brands` (
+ `id_brands` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `rate` FLOAT NOT NULL,
+ `createdate` DATE NOT NULL,
+ `adress` TEXT NOT NULL,
+ `id_brand_status` INT NOT NULL,
+ PRIMARY KEY (`id_brands`),
+ INDEX `id_brand_status_idx` (`id_brand_status` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`category`
+-- -----------------------------------------------------
+69
+CREATE TABLE IF NOT EXISTS `myisamend`.`category` (
+ `id_category` INT NOT NULL AUTO_INCREMENT,
+ `season` VARCHAR(45) NOT NULL,
+ `id_category_type` INT NOT NULL,
+ PRIMARY KEY (`id_category`),
+ INDEX `id_category_type_idx` (`id_category_type` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`category_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`category_type` (
+ `id_category_type` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_category_type`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`city`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`city` (
+ `id_city` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_city`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 1003
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`clients`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`clients` (
+ `id_clients` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `second_name` VARCHAR(45) NOT NULL,
+ `phone_number` VARCHAR(45) NOT NULL,
+ `password` VARCHAR(45) NOT NULL,
+ `id_role` INT NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `createdate` DATE NOT NULL,
+ PRIMARY KEY (`id_clients`),
+ INDEX `id_role_idx` (`id_role` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1506
+70
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`delivery`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`delivery` (
+ `id_delivery` INT NOT NULL AUTO_INCREMENT,
+`delivery_price` FLOAT NOT NULL,
+ `delivery_arrive` DATE NOT NULL,
+ `adress` TEXT NOT NULL,
+ `id_delivery_status` INT NOT NULL,
+ `id_delivery_type` INT NOT NULL,
+ `id_payment_type` INT NOT NULL,
+ PRIMARY KEY (`id_delivery`),
+ INDEX `id_delivery_status_idx` (`id_delivery_status` ASC) VISIBLE,
+ INDEX `id_delivery_type_idx` (`id_delivery_type` ASC) VISIBLE,
+ INDEX `id_payment_type_idx` (`id_payment_type` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`delivery_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`delivery_status` (
+ `id_delivery_status` INT NOT NULL AUTO_INCREMENT,
+ `status_delivery` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_delivery_status`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`delivery_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`delivery_type` (
+ `id_delivery_type` INT NOT NULL AUTO_INCREMENT,
+ `delivery_type` VARCHAR(25) NOT NULL,
+ PRIMARY KEY (`id_delivery_type`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+71
+-- Table `myisamend`.`order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`order` (
+ `id_order` INT NOT NULL AUTO_INCREMENT,
+ `info` TEXT NOT NULL,
+ `id_delivery` INT NOT NULL,
+ `id_clients` INT NOT NULL,
+ `id_status_order` INT NOT NULL,
+PRIMARY KEY (`id_order`),
+ INDEX `id_delivery_idx` (`id_delivery` ASC) VISIBLE,
+ INDEX `id_clients_idx` (`id_clients` ASC) VISIBLE,
+ INDEX `id_status_order_idx` (`id_status_order` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`payment_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`payment_type` (
+ `id_payment_type` INT NOT NULL AUTO_INCREMENT,
+ `payment_type` VARCHAR(25) NOT NULL,
+ PRIMARY KEY (`id_payment_type`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`role` (
+ `id_role` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_role`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`size`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`size` (
+ `id_size` INT NOT NULL AUTO_INCREMENT,
+ `number` INT NOT NULL,
+ `details` TEXT NOT NULL,
+ PRIMARY KEY (`id_size`))
+72
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`sport_clothes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`sport_clothes` (
+ `id_sport_clothes` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `price` FLOAT NOT NULL,
+ `createdate` DATE NOT NULL,
+ `image` VARCHAR(45) NOT NULL,
+ `id_category` INT NOT NULL,
+ `id_vendor` INT NOT NULL,
+ `id_size` INT NOT NULL,
+ `id_brands` INT NOT NULL,
+ PRIMARY KEY (`id_sport_clothes`),
+ INDEX `id_category_idx` (`id_category` ASC) VISIBLE,
+ INDEX `id_brand1_idx` (`id_vendor` ASC) VISIBLE,
+ INDEX `fk_sport_clothes_size_idx` (`id_size` ASC) VISIBLE,
+ INDEX `id_brands_idx` (`id_brands` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1002
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`sport_clothes_has_size`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`sport_clothes_has_size` (
+ `sport_clothes_id_sport_clothes` INT NOT NULL,
+ `size_id_size` INT NOT NULL,
+ PRIMARY KEY (`sport_clothes_id_sport_clothes`, `size_id_size`),
+ INDEX `fk_sport_clothes_has_size_size1_idx` (`size_id_size` ASC) VISIBLE,
+ INDEX `fk_sport_clothes_has_size_sport_clothes1_idx` (`sport_clothes_id_sport_clothes` ASC)
+VISIBLE)
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`status_order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`status_order` (
+ `id_status_order` INT NOT NULL AUTO_INCREMENT,
+ `status_order` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_status_order`))
+73
+ENGINE = MyISAM
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`vendor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`vendor` (
+ `id_vendor` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `second_name` VARCHAR(45) NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `contact_date` DATE NOT NULL,
+ `discount` FLOAT NOT NULL,
+ `info` TEXT NOT NULL,
+ `id_brands` INT NOT NULL,
+ `id_city` INT NOT NULL,
+ PRIMARY KEY (`id_vendor`),
+ INDEX `id_brands_idx` (`id_brands` ASC) VISIBLE,
+ INDEX `id_city_idx` (`id_city` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+USE `mydb` ;
+-- -----------------------------------------------------
+-- Table `mydb`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`role` (
+ `id_role` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_role`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`clients`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`clients` (
+ `id_clients` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `second_name` VARCHAR(45) NOT NULL,
+ `phone_number` VARCHAR(45) NOT NULL,
+ `password` VARCHAR(45) NOT NULL,
+ `id_role` INT NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `createdate` DATE NOT NULL,
+74
+ PRIMARY KEY (`id_clients`),
+ INDEX `id_role_idx` (`id_role` ASC) VISIBLE,
+ CONSTRAINT `id_role`
+ FOREIGN KEY (`id_role`)
+ REFERENCES `mydb`.`role` (`id_role`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1006
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`delivery_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`delivery_status` (
+ `id_delivery_status` INT NOT NULL AUTO_INCREMENT,
+ `status_delivery` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_delivery_status`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`delivery_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`delivery_type` (
+ `id_delivery_type` INT NOT NULL AUTO_INCREMENT,
+ `delivery_type` VARCHAR(25) NOT NULL,
+ PRIMARY KEY (`id_delivery_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`payment_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`payment_type` (
+ `id_payment_type` INT NOT NULL AUTO_INCREMENT,
+ `payment_type` VARCHAR(25) NOT NULL,
+ PRIMARY KEY (`id_payment_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`delivery`
+75
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`delivery` (
+`id_delivery` INT NOT NULL AUTO_INCREMENT,
+ `delivery_price` FLOAT NOT NULL,
+ `delivery_arrive` DATE NOT NULL,
+ `adress` TEXT NOT NULL,
+ `id_delivery_status` INT NOT NULL,
+ `id_delivery_type` INT NOT NULL,
+ `id_payment_type` INT NOT NULL,
+ PRIMARY KEY (`id_delivery`),
+ INDEX `id_delivery_status_idx` (`id_delivery_status` ASC) VISIBLE,
+ INDEX `id_delivery_type_idx` (`id_delivery_type` ASC) VISIBLE,
+ INDEX `id_payment_type_idx` (`id_payment_type` ASC) VISIBLE,
+ CONSTRAINT `id_delivery_status`
+ FOREIGN KEY (`id_delivery_status`)
+ REFERENCES `mydb`.`delivery_status` (`id_delivery_status`),
+ CONSTRAINT `id_delivery_type`
+ FOREIGN KEY (`id_delivery_type`)
+ REFERENCES `mydb`.`delivery_type` (`id_delivery_type`),
+ CONSTRAINT `id_payment_type`
+ FOREIGN KEY (`id_payment_type`)
+ REFERENCES `mydb`.`payment_type` (`id_payment_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`status_order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`status_order` (
+ `id_status_order` INT NOT NULL AUTO_INCREMENT,
+ `status_order` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_status_order`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`order` (
+ `id_order` INT NOT NULL AUTO_INCREMENT,
+ `info` TEXT NOT NULL,
+ `id_delivery` INT NOT NULL,
+ `id_clients` INT NOT NULL,
+ `id_status_order` INT NOT NULL,
+ PRIMARY KEY (`id_order`),
+ INDEX `id_delivery_idx` (`id_delivery` ASC) VISIBLE,
+76
+ INDEX `id_clients_idx` (`id_clients` ASC) VISIBLE,
+ INDEX `id_status_order_idx` (`id_status_order` ASC) VISIBLE,
+ CONSTRAINT `id_clients`
+ FOREIGN KEY (`id_clients`)
+ REFERENCES `mydb`.`clients` (`id_clients`),
+ CONSTRAINT `id_delivery`
+ FOREIGN KEY (`id_delivery`)
+ REFERENCES `mydb`.`delivery` (`id_delivery`),
+ CONSTRAINT `id_status_order`
+ FOREIGN KEY (`id_status_order`)
+ REFERENCES `mydb`.`status_order` (`id_status_order`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`brand_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`brand_status` (
+ `id_brand_status` INT NOT NULL AUTO_INCREMENT,
+ `isactive` TINYINT(1) NOT NULL,
+ PRIMARY KEY (`id_brand_status`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`brands`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`brands` (
+ `id_brands` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `rate` FLOAT NOT NULL,
+ `createdate` DATE NOT NULL,
+ `adress` TEXT NOT NULL,
+ `id_brand_status` INT NOT NULL,
+ PRIMARY KEY (`id_brands`),
+ INDEX `id_brand_status_idx` (`id_brand_status` ASC) VISIBLE,
+ CONSTRAINT `id_brand_status`
+ FOREIGN KEY (`id_brand_status`)
+ REFERENCES `mydb`.`brand_status` (`id_brand_status`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+77
+-- Table `mydb`.`category_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`category_type` (
+ `id_category_type` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_category_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`category` (
+ `id_category` INT NOT NULL AUTO_INCREMENT,
+ `season` VARCHAR(45) NOT NULL,
+ `id_category_type` INT NOT NULL,
+ PRIMARY KEY (`id_category`),
+ INDEX `id_category_type_idx` (`id_category_type` ASC) VISIBLE,
+ CONSTRAINT `id_category_type`
+ FOREIGN KEY (`id_category_type`)
+ REFERENCES `mydb`.`category_type` (`id_category_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`size`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`size` (
+ `id_size` INT NOT NULL AUTO_INCREMENT,
+ `number` INT NOT NULL,
+ `details` TEXT NOT NULL,
+ PRIMARY KEY (`id_size`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`city`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`city` (
+ `id_city` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_city`))
+ENGINE = InnoDB
+78
+AUTO_INCREMENT = 503
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`vendor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`vendor` (
+ `id_vendor` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `second_name` VARCHAR(45) NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `contact_date` DATE NOT NULL,
+ `discount` FLOAT NOT NULL,
+ `info` TEXT NOT NULL,
+ `id_brands` INT NOT NULL,
+ `id_city` INT NOT NULL,
+ PRIMARY KEY (`id_vendor`),
+ INDEX `id_brands_idx` (`id_brands` ASC) VISIBLE,
+ INDEX `id_city_idx` (`id_city` ASC) VISIBLE,
+ CONSTRAINT `id_city`
+ FOREIGN KEY (`id_city`)
+ REFERENCES `mydb`.`city` (`id_city`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`sport_clothes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`sport_clothes` (
+ `id_sport_clothes` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `price` FLOAT NOT NULL,
+ `createdate` DATE NOT NULL,
+ `image` VARCHAR(45) NOT NULL,
+ `id_category` INT NOT NULL,
+ `id_vendor` INT NOT NULL,
+ `id_size` INT NOT NULL,
+ `id_brands` INT NOT NULL,
+ PRIMARY KEY (`id_sport_clothes`),
+ INDEX `id_category_idx` (`id_category` ASC) VISIBLE,
+ INDEX `id_brand1_idx` (`id_vendor` ASC) VISIBLE,
+ INDEX `fk_sport_clothes_size_idx` (`id_size` ASC) VISIBLE,
+ INDEX `id_brands_idx` (`id_brands` ASC) VISIBLE,
+ CONSTRAINT `id_brands`
+ FOREIGN KEY (`id_brands`)
+ REFERENCES `mydb`.`brands` (`id_brands`),
+ CONSTRAINT `id_category`
+79
+ FOREIGN KEY (`id_category`)
+ REFERENCES `mydb`.`category` (`id_category`),
+ CONSTRAINT `id_size`
+ FOREIGN KEY (`id_size`)
+ REFERENCES `mydb`.`size` (`id_size`),
+ CONSTRAINT `id_vendor`
+ FOREIGN KEY (`id_vendor`)
+ REFERENCES `mydb`.`vendor` (`id_vendor`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 502
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`basket`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`basket` (
+ `id_basket` INT NOT NULL AUTO_INCREMENT,
+ `amount` INT NOT NULL,
+ `id_order` INT NOT NULL,
+ `id_sport_clothes` INT NOT NULL,
+ PRIMARY KEY (`id_basket`),
+ INDEX `fk_order_has_sport_clothes_sport_clothes1_idx` (`id_sport_clothes` ASC) VISIBLE,
+ INDEX `fk_order_has_sport_clothes_order1_idx` (`id_order` ASC) VISIBLE,
+ CONSTRAINT `id_order`
+ FOREIGN KEY (`id_order`)
+ REFERENCES `mydb`.`order` (`id_order`),
+ CONSTRAINT `id_sport_clothes`
+ FOREIGN KEY (`id_sport_clothes`)
+ REFERENCES `mydb`.`sport_clothes` (`id_sport_clothes`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`sport_clothes_has_size`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`sport_clothes_has_size` (
+ `sport_clothes_id_sport_clothes` INT NOT NULL,
+ `size_id_size` INT NOT NULL,
+ PRIMARY KEY (`sport_clothes_id_sport_clothes`, `size_id_size`),
+ INDEX `fk_sport_clothes_has_size_size1_idx` (`size_id_size` ASC) VISIBLE,
+ INDEX `fk_sport_clothes_has_size_sport_clothes1_idx` (`sport_clothes_id_sport_clothes` ASC)
+VISIBLE,
+ CONSTRAINT `fk_sport_clothes_has_size_size1`
+ FOREIGN KEY (`size_id_size`)
+ REFERENCES `mydb`.`size` (`id_size`),
+ CONSTRAINT `fk_sport_clothes_has_size_sport_clothes1`
+ FOREIGN KEY (`sport_clothes_id_sport_clothes`)
+80
+ REFERENCES `mydb`.`sport_clothes` (`id_sport_clothes`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+USE `myisamend`;
+DELIMITER $$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_basket`
+BEFORE INSERT ON `myisamend`.`basket`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `order` where id_order=NEW.id_order)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+product of basket';
+END IF;
+ IF NOT EXISTS (SELECT 1 FROM `sport_clothes` where id_sport_clothes=NEW.id_sport_clothes)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+product of basket';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_brand_status`
+BEFORE DELETE ON `myisamend`.`brand_status`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `brands` where id_brand_status=OLD.id_brand_status))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+brands with this brand status';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_brands`
+BEFORE DELETE ON `myisamend`.`brands`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `sport_clothes` where id_brands=OLD.id_brands))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+sport_clothes with this brands';
+81
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_brands`
+BEFORE INSERT ON `myisamend`.`brands`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `brands_status` where id_brand_status=NEW.id_brand_status)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+location';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_brands`
+BEFORE UPDATE ON `myisamend`.`brands`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_brands=OLD.id_brands) AND EXISTS (SELECT 1 FROM `sport_clothes` where
+id_brands=OLD.id_brands))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+products with old brand id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_category`
+BEFORE INSERT ON `myisamend`.`category`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `category_type` where
+id_category_type=NEW.id_category_type)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+product of category type';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_category`
+BEFORE UPDATE ON `myisamend`.`category`
+82
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_category=OLD.id_category) AND EXISTS (SELECT 1 FROM `sport_clothes`
+where id_category=OLD.id_category))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+sport clothes with old type id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_category_type`
+BEFORE DELETE ON `myisamend`.`category_type`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `category` where id_category_type=OLD.id_category_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+category with this category type';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_category_type`
+BEFORE UPDATE ON `myisamend`.`category_type`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_category_type=OLD.id_category_type) AND EXISTS (SELECT 1 FROM
+`category` where id_category_type=OLD.id_category_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+category type in category';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_city`
+BEFORE DELETE ON `myisamend`.`city`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `vendor` where id_city=OLD.id_city))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+vendor from this city';
+END IF;
+83
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_city`
+BEFORE INSERT ON `myisamend`.`city`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `vendor` where id_city=NEW.id_city)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no city in
+vendor';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_city`
+BEFORE UPDATE ON `myisamend`.`city`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_city=OLD.id_city) AND EXISTS (SELECT 1 FROM `brand` where
+id_city=OLD.id_city))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+brands with city';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_clients`
+BEFORE INSERT ON `myisamend`.`clients`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `role` where role_id=NEW.id_role)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+role';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_clients`
+BEFORE UPDATE ON `myisamend`.`clients`
+FOR EACH ROW
+84
+BEGIN
+IF ((NOT NEW.id_clients=OLD.id_clients) AND EXISTS (SELECT 1 FROM `order` where
+id_clients=OLD.id_clients))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+orders with old user id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`after_Delete_clients`
+AFTER DELETE ON `myisamend`.`clients`
+FOR EACH ROW
+BEGIN
+DELETE FROM `order` where id_clients=OLD.id_clients;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_delivery`
+BEFORE INSERT ON `myisamend`.`delivery`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `delivery_type` where
+id_delivery_type=NEW.id_delivery_type)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+order';
+END IF;
+IF NOT EXISTS(SELECT 1 FROM `delivery_status` WHERE id_delivery_status =
+NEW.id_delivery_status)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+delivery status';
+END IF;
+IF NOT EXISTS(SELECT 1 FROM `payment_type` WHERE id_payment_type =
+NEW.id_payment_type)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+payment type';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_delivery_status`
+BEFORE DELETE ON `myisamend`.`delivery_status`
+FOR EACH ROW
+85
+BEGIN
+IF (EXISTS (SELECT 1 FROM `delivery` where id_delivery_status=OLD.id_delivery_status))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+deliveries with this delivery status';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_delivery_status`
+BEFORE UPDATE ON `myisamend`.`delivery_status`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_delivery_status=OLD.id_delivery_status) AND EXISTS (SELECT 1 FROM
+`delivery` where id_delivery_status=OLD.id_delivery_status))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+deliveries with old delivery status id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_delivery_type`
+BEFORE DELETE ON `myisamend`.`delivery_type`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `delivery` where id_delivery_type=OLD.id_delivery_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+delivery with delivery type';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_order`
+BEFORE UPDATE ON `myisamend`.`order`
+FOR EACH ROW
+BEGIN
+
+IF ((NOT NEW.id_order=OLD.id_order) AND EXISTS (SELECT 1 FROM `order` where
+id_order=OLD.id_order))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+orderlists with old order id';
+END IF;
+86
+IF ((NOT NEW.id_order=OLD.id_order) AND EXISTS (SELECT 1 FROM `basket` where
+id_order=OLD.id_order))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+basket with old order id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_payment_type`
+BEFORE DELETE ON `myisamend`.`payment_type`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `delivery` where id_payment_type=OLD.id_payment_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+deliveries with this type of payment';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_payment_type`
+BEFORE UPDATE ON `myisamend`.`payment_type`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_payment_type=OLD.id_payment_type) AND EXISTS (SELECT 1 FROM
+`delivery` where id_payment_type=OLD.id_payment_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+deliveries with old payment id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_role`
+BEFORE DELETE ON `myisamend`.`role`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `clients` where id_role=OLD.id_role))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+clients with this role';
+END IF;
+END$$
+87
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_role`
+BEFORE UPDATE ON `myisamend`.`role`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_role=OLD.id_role) AND EXISTS (SELECT 1 FROM `clients` where
+id_role=OLD.id_role))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+users with old role id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_sport_clothes`
+BEFORE DELETE ON `myisamend`.`sport_clothes`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `basket` where id_sport_clothes=OLD.id_sport_clothes))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+order lists with this product';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_sport_clothes`
+BEFORE INSERT ON `myisamend`.`sport_clothes`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `category` where id_category=NEW.id_category)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+type of category';
+END IF;
+IF NOT EXISTS(SELECT 1 FROM `vendor` WHERE id_vendor = NEW.id_vendor)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+brand of vendor';
+END IF;
+IF NOT EXISTS(SELECT 1 FROM `size` WHERE id_size = NEW.id_size)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+size';
+END IF;
+88
+IF NOT EXISTS (SELECT 1 FROM `brands` where id_brands=NEW.id_brands)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+type of brands';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_sport_clothes`
+BEFORE UPDATE ON `myisamend`.`sport_clothes`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_sport_clothes=OLD.id_sport_clothes) AND EXISTS (SELECT 1 FROM `basket`
+where id_sport_clothes=OLD.id_sport_clothes))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+basket with old sport_clothes';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`after_Delete_size`
+AFTER DELETE ON `myisamend`.`sport_clothes`
+FOR EACH ROW
+BEGIN
+DELETE FROM `sport_clothes` where id_size=OLD.id_size;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_status_order`
+BEFORE DELETE ON `myisamend`.`status_order`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `order` where id_status_order=OLD.id_status_order))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+orders with this status';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_status_order`
+BEFORE UPDATE ON `myisamend`.`status_order`
+FOR EACH ROW
+89
+BEGIN
+IF ((NOT NEW.id_status_order=OLD.id_status_order) AND EXISTS (SELECT 1 FROM `order`
+where id_status_order=OLD.id_status_order))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+orders with old status order';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_vendor`
+BEFORE INSERT ON `myisamend`.`vendor`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `brands` where id_brands=NEW.id_brands)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+vendor';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_vendor`
+BEFORE UPDATE ON `myisamend`.`vendor`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_vendor=OLD.id_vendor) AND EXISTS (SELECT 1 FROM `sport_clothes` where
+id_vendor=OLD.id_vendor))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+products with old supplier id';
+END IF;
+END$$
+DELIMITER ;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+А.2 - SQL-код розробки бази даних типу MyIsam:
+-- MySQL Workbench Forward Engineering
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS,
+FOREIGN_KEY_CHECKS=0;
+90
+SET @OLD_SQL_MODE=@@SQL_MODE,
+SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_
+ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+-- -----------------------------------------------------
+-- Schema myisamend
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema myisamend
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `myisamend` DEFAULT CHARACTER SET utf8mb4
+COLLATE utf8mb4_0900_ai_ci ;
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 COLLATE
+utf8mb4_0900_ai_ci ;
+USE `myisamend` ;
+-- -----------------------------------------------------
+-- Table `myisamend`.`basket`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`basket` (
+ `id_basket` INT NOT NULL AUTO_INCREMENT,
+ `amount` INT NOT NULL,
+ `id_order` INT NOT NULL,
+ `id_sport_clothes` INT NOT NULL,
+ PRIMARY KEY (`id_basket`),
+ INDEX `fk_order_has_sport_clothes_sport_clothes1_idx` (`id_sport_clothes` ASC) VISIBLE,
+ INDEX `fk_order_has_sport_clothes_order1_idx` (`id_order` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`brand_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`brand_status` (
+ `id_brand_status` INT NOT NULL AUTO_INCREMENT,
+`isactive` TINYINT(1) NOT NULL,
+ PRIMARY KEY (`id_brand_status`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+91
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`brands`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`brands` (
+ `id_brands` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `rate` FLOAT NOT NULL,
+ `createdate` DATE NOT NULL,
+ `adress` TEXT NOT NULL,
+ `id_brand_status` INT NOT NULL,
+ PRIMARY KEY (`id_brands`),
+ INDEX `id_brand_status_idx` (`id_brand_status` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`category` (
+ `id_category` INT NOT NULL AUTO_INCREMENT,
+ `season` VARCHAR(45) NOT NULL,
+ `id_category_type` INT NOT NULL,
+ PRIMARY KEY (`id_category`),
+ INDEX `id_category_type_idx` (`id_category_type` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`category_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`category_type` (
+ `id_category_type` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_category_type`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`city`
+92
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`city` (
+ `id_city` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_city`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 1003
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`clients`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`clients` (
+ `id_clients` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `second_name` VARCHAR(45) NOT NULL,
+ `phone_number` VARCHAR(45) NOT NULL,
+ `password` VARCHAR(45) NOT NULL,
+ `id_role` INT NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `createdate` DATE NOT NULL,
+ PRIMARY KEY (`id_clients`),
+ INDEX `id_role_idx` (`id_role` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1506
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`delivery`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`delivery` (
+ `id_delivery` INT NOT NULL AUTO_INCREMENT,
+ `delivery_price` FLOAT NOT NULL,
+ `delivery_arrive` DATE NOT NULL,
+ `adress` TEXT NOT NULL,
+ `id_delivery_status` INT NOT NULL,
+ `id_delivery_type` INT NOT NULL,
+ `id_payment_type` INT NOT NULL,
+ PRIMARY KEY (`id_delivery`),
+ INDEX `id_delivery_status_idx` (`id_delivery_status` ASC) VISIBLE,
+ INDEX `id_delivery_type_idx` (`id_delivery_type` ASC) VISIBLE,
+ INDEX `id_payment_type_idx` (`id_payment_type` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+93
+-- -----------------------------------------------------
+-- Table `myisamend`.`delivery_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`delivery_status` (
+ `id_delivery_status` INT NOT NULL AUTO_INCREMENT,
+ `status_delivery` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_delivery_status`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`delivery_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`delivery_type` (
+ `id_delivery_type` INT NOT NULL AUTO_INCREMENT,
+ `delivery_type` VARCHAR(25) NOT NULL,
+ PRIMARY KEY (`id_delivery_type`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`order` (
+ `id_order` INT NOT NULL AUTO_INCREMENT,
+ `info` TEXT NOT NULL,
+`id_delivery` INT NOT NULL,
+ `id_clients` INT NOT NULL,
+ `id_status_order` INT NOT NULL,
+ PRIMARY KEY (`id_order`),
+ INDEX `id_delivery_idx` (`id_delivery` ASC) VISIBLE,
+ INDEX `id_clients_idx` (`id_clients` ASC) VISIBLE,
+ INDEX `id_status_order_idx` (`id_status_order` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`payment_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`payment_type` (
+ `id_payment_type` INT NOT NULL AUTO_INCREMENT,
+ `payment_type` VARCHAR(25) NOT NULL,
+94
+ PRIMARY KEY (`id_payment_type`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`role` (
+ `id_role` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_role`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`size`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`size` (
+ `id_size` INT NOT NULL AUTO_INCREMENT,
+ `number` INT NOT NULL,
+ `details` TEXT NOT NULL,
+ PRIMARY KEY (`id_size`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`sport_clothes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`sport_clothes` (
+ `id_sport_clothes` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `price` FLOAT NOT NULL,
+ `createdate` DATE NOT NULL,
+ `image` VARCHAR(45) NOT NULL,
+ `id_category` INT NOT NULL,
+ `id_vendor` INT NOT NULL,
+ `id_size` INT NOT NULL,
+ `id_brands` INT NOT NULL,
+ PRIMARY KEY (`id_sport_clothes`),
+ INDEX `id_category_idx` (`id_category` ASC) VISIBLE,
+ INDEX `id_brand1_idx` (`id_vendor` ASC) VISIBLE,
+ INDEX `fk_sport_clothes_size_idx` (`id_size` ASC) VISIBLE,
+95
+ INDEX `id_brands_idx` (`id_brands` ASC) VISIBLE)
+ENGINE = MyISAM
+AUTO_INCREMENT = 1002
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`sport_clothes_has_size`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`sport_clothes_has_size` (
+ `sport_clothes_id_sport_clothes` INT NOT NULL,
+ `size_id_size` INT NOT NULL,
+ PRIMARY KEY (`sport_clothes_id_sport_clothes`, `size_id_size`),
+ INDEX `fk_sport_clothes_has_size_size1_idx` (`size_id_size` ASC) VISIBLE,
+ INDEX `fk_sport_clothes_has_size_sport_clothes1_idx` (`sport_clothes_id_sport_clothes` ASC)
+VISIBLE)
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`status_order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`status_order` (
+ `id_status_order` INT NOT NULL AUTO_INCREMENT,
+ `status_order` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_status_order`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `myisamend`.`vendor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myisamend`.`vendor` (
+ `id_vendor` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `second_name` VARCHAR(45) NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `contact_date` DATE NOT NULL,
+ `discount` FLOAT NOT NULL,
+
+`info` TEXT NOT NULL,
+ `id_brands` INT NOT NULL,
+ `id_city` INT NOT NULL,
+ PRIMARY KEY (`id_vendor`),
+ INDEX `id_brands_idx` (`id_brands` ASC) VISIBLE,
+ INDEX `id_city_idx` (`id_city` ASC) VISIBLE)
+96
+ENGINE = MyISAM
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+USE `mydb` ;
+-- -----------------------------------------------------
+-- Table `mydb`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`role` (
+ `id_role` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_role`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`clients`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`clients` (
+ `id_clients` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `second_name` VARCHAR(45) NOT NULL,
+ `phone_number` VARCHAR(45) NOT NULL,
+ `password` VARCHAR(45) NOT NULL,
+ `id_role` INT NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `createdate` DATE NOT NULL,
+ PRIMARY KEY (`id_clients`),
+ INDEX `id_role_idx` (`id_role` ASC) VISIBLE,
+ CONSTRAINT `id_role`
+ FOREIGN KEY (`id_role`)
+ REFERENCES `mydb`.`role` (`id_role`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1006
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`delivery_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`delivery_status` (
+ `id_delivery_status` INT NOT NULL AUTO_INCREMENT,
+ `status_delivery` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_delivery_status`))
+ENGINE = InnoDB
+97
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`delivery_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`delivery_type` (
+ `id_delivery_type` INT NOT NULL AUTO_INCREMENT,
+ `delivery_type` VARCHAR(25) NOT NULL,
+ PRIMARY KEY (`id_delivery_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`payment_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`payment_type` (
+ `id_payment_type` INT NOT NULL AUTO_INCREMENT,
+ `payment_type` VARCHAR(25) NOT NULL,
+ PRIMARY KEY (`id_payment_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`delivery`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`delivery` (
+ `id_delivery` INT NOT NULL AUTO_INCREMENT,
+ `delivery_price` FLOAT NOT NULL,
+ `delivery_arrive` DATE NOT NULL,
+ `adress` TEXT NOT NULL,
+ `id_delivery_status` INT NOT NULL,
+ `id_delivery_type` INT NOT NULL,
+ `id_payment_type` INT NOT NULL,
+ PRIMARY KEY (`id_delivery`),
+ INDEX `id_delivery_status_idx` (`id_delivery_status` ASC) VISIBLE,
+ INDEX `id_delivery_type_idx` (`id_delivery_type` ASC) VISIBLE,
+ INDEX `id_payment_type_idx` (`id_payment_type` ASC) VISIBLE,
+ CONSTRAINT `id_delivery_status`
+ FOREIGN KEY (`id_delivery_status`)
+ REFERENCES `mydb`.`delivery_status` (`id_delivery_status`),
+ CONSTRAINT `id_delivery_type`
+ FOREIGN KEY (`id_delivery_type`)
+98
+ REFERENCES `mydb`.`delivery_type` (`id_delivery_type`),
+ CONSTRAINT `id_payment_type`
+ FOREIGN KEY (`id_payment_type`)
+ REFERENCES `mydb`.`payment_type` (`id_payment_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`status_order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`status_order` (
+ `id_status_order` INT NOT NULL AUTO_INCREMENT,
+ `status_order` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_status_order`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`order` (
+ `id_order` INT NOT NULL AUTO_INCREMENT,
+ `info` TEXT NOT NULL,
+ `id_delivery` INT NOT NULL,
+ `id_clients` INT NOT NULL,
+ `id_status_order` INT NOT NULL,
+ PRIMARY KEY (`id_order`),
+ INDEX `id_delivery_idx` (`id_delivery` ASC) VISIBLE,
+ INDEX `id_clients_idx` (`id_clients` ASC) VISIBLE,
+ INDEX `id_status_order_idx` (`id_status_order` ASC) VISIBLE,
+ CONSTRAINT `id_clients`
+ FOREIGN KEY (`id_clients`)
+ REFERENCES `mydb`.`clients` (`id_clients`),
+ CONSTRAINT `id_delivery`
+ FOREIGN KEY (`id_delivery`)
+ REFERENCES `mydb`.`delivery` (`id_delivery`),
+ CONSTRAINT `id_status_order`
+ FOREIGN KEY (`id_status_order`)
+ REFERENCES `mydb`.`status_order` (`id_status_order`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+99
+-- -----------------------------------------------------
+-- Table `mydb`.`brand_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`brand_status` (
+ `id_brand_status` INT NOT NULL AUTO_INCREMENT,
+ `isactive` TINYINT(1) NOT NULL,
+ PRIMARY KEY (`id_brand_status`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`brands`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`brands` (
+ `id_brands` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `rate` FLOAT NOT NULL,
+ `createdate` DATE NOT NULL,
+ `adress` TEXT NOT NULL,
+ `id_brand_status` INT NOT NULL,
+ PRIMARY KEY (`id_brands`),
+ INDEX `id_brand_status_idx` (`id_brand_status` ASC) VISIBLE,
+ CONSTRAINT `id_brand_status`
+ FOREIGN KEY (`id_brand_status`)
+ REFERENCES `mydb`.`brand_status` (`id_brand_status`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`category_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`category_type` (
+ `id_category_type` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_category_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`category` (
+ `id_category` INT NOT NULL AUTO_INCREMENT,
+100
+ `season` VARCHAR(45) NOT NULL,
+ `id_category_type` INT NOT NULL,
+ PRIMARY KEY (`id_category`),
+ INDEX `id_category_type_idx` (`id_category_type` ASC) VISIBLE,
+ CONSTRAINT `id_category_type`
+ FOREIGN KEY (`id_category_type`)
+ REFERENCES `mydb`.`category_type` (`id_category_type`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`size`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`size` (
+ `id_size` INT NOT NULL AUTO_INCREMENT,
+ `number` INT NOT NULL,
+ `details` TEXT NOT NULL,
+ PRIMARY KEY (`id_size`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`city`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`city` (
+ `id_city` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ PRIMARY KEY (`id_city`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 503
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`vendor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`vendor` (
+ `id_vendor` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `second_name` VARCHAR(45) NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `contact_date` DATE NOT NULL,
+ `discount` FLOAT NOT NULL,
+ `info` TEXT NOT NULL,
+101
+ `id_brands` INT NOT NULL,
+ `id_city` INT NOT NULL,
+ PRIMARY KEY (`id_vendor`),
+ INDEX `id_brands_idx` (`id_brands` ASC) VISIBLE,
+ INDEX `id_city_idx` (`id_city` ASC) VISIBLE,
+ CONSTRAINT `id_city`
+ FOREIGN KEY (`id_city`)
+ REFERENCES `mydb`.`city` (`id_city`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`sport_clothes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`sport_clothes` (
+ `id_sport_clothes` INT NOT NULL AUTO_INCREMENT,
+ `name` VARCHAR(45) NOT NULL,
+ `price` FLOAT NOT NULL,
+ `createdate` DATE NOT NULL,
+ `image` VARCHAR(45) NOT NULL,
+ `id_category` INT NOT NULL,
+ `id_vendor` INT NOT NULL,
+ `id_size` INT NOT NULL,
+ `id_brands` INT NOT NULL,
+ PRIMARY KEY (`id_sport_clothes`),
+ INDEX `id_category_idx` (`id_category` ASC) VISIBLE,
+ INDEX `id_brand1_idx` (`id_vendor` ASC) VISIBLE,
+ INDEX `fk_sport_clothes_size_idx` (`id_size` ASC) VISIBLE,
+ INDEX `id_brands_idx` (`id_brands` ASC) VISIBLE,
+ CONSTRAINT `id_brands`
+ FOREIGN KEY (`id_brands`)
+ REFERENCES `mydb`.`brands` (`id_brands`),
+ CONSTRAINT `id_category`
+ FOREIGN KEY (`id_category`)
+ REFERENCES `mydb`.`category` (`id_category`),
+ CONSTRAINT `id_size`
+ FOREIGN KEY (`id_size`)
+ REFERENCES `mydb`.`size` (`id_size`),
+ CONSTRAINT `id_vendor`
+ FOREIGN KEY (`id_vendor`)
+ REFERENCES `mydb`.`vendor` (`id_vendor`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 502
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+102
+-- Table `mydb`.`basket`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`basket` (
+ `id_basket` INT NOT NULL AUTO_INCREMENT,
+ `amount` INT NOT NULL,
+ `id_order` INT NOT NULL,
+ `id_sport_clothes` INT NOT NULL,
+ PRIMARY KEY (`id_basket`),
+ INDEX `fk_order_has_sport_clothes_sport_clothes1_idx` (`id_sport_clothes` ASC) VISIBLE,
+ INDEX `fk_order_has_sport_clothes_order1_idx` (`id_order` ASC) VISIBLE,
+ CONSTRAINT `id_order`
+ FOREIGN KEY (`id_order`)
+ REFERENCES `mydb`.`order` (`id_order`),
+ CONSTRAINT `id_sport_clothes`
+ FOREIGN KEY (`id_sport_clothes`)
+ REFERENCES `mydb`.`sport_clothes` (`id_sport_clothes`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 501
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `mydb`.`sport_clothes_has_size`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`sport_clothes_has_size` (
+ `sport_clothes_id_sport_clothes` INT NOT NULL,
+ `size_id_size` INT NOT NULL,
+ PRIMARY KEY (`sport_clothes_id_sport_clothes`, `size_id_size`),
+ INDEX `fk_sport_clothes_has_size_size1_idx` (`size_id_size` ASC) VISIBLE,
+ INDEX `fk_sport_clothes_has_size_sport_clothes1_idx` (`sport_clothes_id_sport_clothes` ASC)
+VISIBLE,
+ CONSTRAINT `fk_sport_clothes_has_size_size1`
+ FOREIGN KEY (`size_id_size`)
+ REFERENCES `mydb`.`size` (`id_size`),
+ CONSTRAINT `fk_sport_clothes_has_size_sport_clothes1`
+ FOREIGN KEY (`sport_clothes_id_sport_clothes`)
+ REFERENCES `mydb`.`sport_clothes` (`id_sport_clothes`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+USE `myisamend`;
+DELIMITER $$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_basket`
+BEFORE INSERT ON `myisamend`.`basket`
+FOR EACH ROW
+103
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `order` where id_order=NEW.id_order)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+product of basket';
+END IF;
+ IF NOT EXISTS (SELECT 1 FROM `sport_clothes` where id_sport_clothes=NEW.id_sport_clothes)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+product of basket';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_brand_status`
+BEFORE DELETE ON `myisamend`.`brand_status`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `brands` where id_brand_status=OLD.id_brand_status))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+brands with this brand status';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_brands`
+BEFORE DELETE ON `myisamend`.`brands`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `sport_clothes` where id_brands=OLD.id_brands))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+sport_clothes with this brands';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_brands`
+BEFORE INSERT ON `myisamend`.`brands`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `brands_status` where id_brand_status=NEW.id_brand_status)
+THEN
+104
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+location';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_brands`
+BEFORE UPDATE ON `myisamend`.`brands`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_brands=OLD.id_brands) AND EXISTS (SELECT 1 FROM `sport_clothes` where
+id_brands=OLD.id_brands))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+products with old brand id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_category`
+BEFORE INSERT ON `myisamend`.`category`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `category_type` where
+id_category_type=NEW.id_category_type)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+product of category type';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_category`
+BEFORE UPDATE ON `myisamend`.`category`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_category=OLD.id_category) AND EXISTS (SELECT 1 FROM `sport_clothes`
+where id_category=OLD.id_category))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are sport
+clothes with old type id';
+END IF;
+END$$
+USE `myisamend`$$
+105
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_category_type`
+BEFORE DELETE ON `myisamend`.`category_type`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `category` where id_category_type=OLD.id_category_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+category with this category type';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_category_type`
+BEFORE UPDATE ON `myisamend`.`category_type`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_category_type=OLD.id_category_type) AND EXISTS (SELECT 1 FROM
+`category` where id_category_type=OLD.id_category_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+category type in category';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_city`
+BEFORE DELETE ON `myisamend`.`city`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `vendor` where id_city=OLD.id_city))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+vendor from this city';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_city`
+BEFORE INSERT ON `myisamend`.`city`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `vendor` where id_city=NEW.id_city)
+THEN
+106
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no city in
+vendor';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_city`
+BEFORE UPDATE ON `myisamend`.`city`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_city=OLD.id_city) AND EXISTS (SELECT 1 FROM `brand` where
+id_city=OLD.id_city))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+brands with city';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_clients`
+BEFORE INSERT ON `myisamend`.`clients`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `role` where role_id=NEW.id_role)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+role';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_clients`
+BEFORE UPDATE ON `myisamend`.`clients`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_clients=OLD.id_clients) AND EXISTS (SELECT 1 FROM `order` where
+id_clients=OLD.id_clients))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+orders with old user id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+107
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`after_Delete_clients`
+AFTER DELETE ON `myisamend`.`clients`
+FOR EACH ROW
+BEGIN
+DELETE FROM `order` where id_clients=OLD.id_clients;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_delivery`
+BEFORE INSERT ON `myisamend`.`delivery`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `delivery_type` where
+id_delivery_type=NEW.id_delivery_type)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+order';
+END IF;
+IF NOT EXISTS(SELECT 1 FROM `delivery_status` WHERE id_delivery_status =
+NEW.id_delivery_status)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+delivery status';
+END IF;
+IF NOT EXISTS(SELECT 1 FROM `payment_type` WHERE id_payment_type =
+NEW.id_payment_type)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+payment type';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_delivery_status`
+BEFORE DELETE ON `myisamend`.`delivery_status`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `delivery` where id_delivery_status=OLD.id_delivery_status))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+deliveries with this delivery status';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+108
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_delivery_status`
+BEFORE UPDATE ON `myisamend`.`delivery_status`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_delivery_status=OLD.id_delivery_status) AND EXISTS (SELECT 1 FROM
+`delivery` where id_delivery_status=OLD.id_delivery_status))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+deliveries with old delivery status id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_delivery_type`
+BEFORE DELETE ON `myisamend`.`delivery_type`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `delivery` where id_delivery_type=OLD.id_delivery_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+delivery with delivery type';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_order`
+BEFORE UPDATE ON `myisamend`.`order`
+FOR EACH ROW
+BEGIN
+ IF ((NOT NEW.id_order=OLD.id_order) AND EXISTS (SELECT 1 FROM `order` where
+id_order=OLD.id_order))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+orderlists with old order id';
+END IF;
+IF ((NOT NEW.id_order=OLD.id_order) AND EXISTS (SELECT 1 FROM `basket` where
+id_order=OLD.id_order))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+basket with old order id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+109
+TRIGGER `myisamend`.`Before_Delete_payment_type`
+BEFORE DELETE ON `myisamend`.`payment_type`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `delivery` where id_payment_type=OLD.id_payment_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+deliveries with this type of payment';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_payment_type`
+BEFORE UPDATE ON `myisamend`.`payment_type`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_payment_type=OLD.id_payment_type) AND EXISTS (SELECT 1 FROM
+`delivery` where id_payment_type=OLD.id_payment_type))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+deliveries with old payment id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_role`
+BEFORE DELETE ON `myisamend`.`role`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `clients` where id_role=OLD.id_role))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+clients with this role';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_role`
+BEFORE UPDATE ON `myisamend`.`role`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_role=OLD.id_role) AND EXISTS (SELECT 1 FROM `clients` where
+id_role=OLD.id_role))
+THEN
+110
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+users with old role id';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_sport_clothes`
+BEFORE DELETE ON `myisamend`.`sport_clothes`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `basket` where id_sport_clothes=OLD.id_sport_clothes))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+order lists with this product';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_sport_clothes`
+BEFORE INSERT ON `myisamend`.`sport_clothes`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `category` where id_category=NEW.id_category)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+type of category';
+END IF;
+IF NOT EXISTS(SELECT 1 FROM `vendor` WHERE id_vendor = NEW.id_vendor)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+brand of vendor';
+END IF;
+IF NOT EXISTS(SELECT 1 FROM `size` WHERE id_size = NEW.id_size)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+size';
+END IF;
+IF NOT EXISTS (SELECT 1 FROM `brands` where id_brands=NEW.id_brands)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+type of brands';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+111
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_sport_clothes`
+BEFORE UPDATE ON `myisamend`.`sport_clothes`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_sport_clothes=OLD.id_sport_clothes) AND EXISTS (SELECT 1 FROM `basket`
+where id_sport_clothes=OLD.id_sport_clothes))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+basket with old sport_clothes';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`after_Delete_size`
+AFTER DELETE ON `myisamend`.`sport_clothes`
+FOR EACH ROW
+BEGIN
+DELETE FROM `sport_clothes` where id_size=OLD.id_size;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Delete_status_order`
+BEFORE DELETE ON `myisamend`.`status_order`
+FOR EACH ROW
+BEGIN
+IF (EXISTS (SELECT 1 FROM `order` where id_status_order=OLD.id_status_order))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'DELETE FAILED - there are
+orders with this status';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_status_order`
+BEFORE UPDATE ON `myisamend`.`status_order`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_status_order=OLD.id_status_order) AND EXISTS (SELECT 1 FROM `order`
+where id_status_order=OLD.id_status_order))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+orders with old status order';
+END IF;
+END$$
+112
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_Insert_vendor`
+BEFORE INSERT ON `myisamend`.`vendor`
+FOR EACH ROW
+BEGIN
+IF NOT EXISTS (SELECT 1 FROM `brands` where id_brands=NEW.id_brands)
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT failed - there is no such
+vendor';
+END IF;
+END$$
+USE `myisamend`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `myisamend`.`Before_UPDATE_vendor`
+BEFORE UPDATE ON `myisamend`.`vendor`
+FOR EACH ROW
+BEGIN
+IF ((NOT NEW.id_vendor=OLD.id_vendor) AND EXISTS (SELECT 1 FROM `sport_clothes` where
+id_vendor=OLD.id_vendor))
+THEN
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE FAILED - there are
+products with old supplier id';
+END IF;
+END$$
+DELIMITER ;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
